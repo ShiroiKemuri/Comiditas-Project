@@ -1,4 +1,4 @@
-package co;
+package co.edu.uvpalmira.urss.Backend;
 
 public class CommitTest {
     

@@ -1,4 +1,4 @@
-package co.edu.uvpalmira.urss.comiditas;
+package co.edu.uvpalmira.urss.Backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
