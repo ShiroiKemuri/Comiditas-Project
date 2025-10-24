@@ -4,9 +4,7 @@ public class Persona {
     
     private String nombre;
     private int edad;
-    
     private int identificacion;
-    
     private String genero;
 
     public Persona(String nombre, int edad, int identificacion, String genero) {
