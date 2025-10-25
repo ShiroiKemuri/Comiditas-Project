@@ -40,6 +40,11 @@ dependencies {
 	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
  	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.1'
 
+	// https://mvnrepository.com/artifact/org.springframework/spring-web
+	implementation 'org.springframework:spring-web:6.2.11'
+
+	// https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations
+	implementation 'io.swagger.core.v3:swagger-annotations:2.2.38'
 }
 
 tasks.named('test') {
