@@ -20,9 +20,9 @@ public class AuthController {
 
     @Operation(summary = "Iniciar sesión", description = "Permite a un administrador iniciar sesión y obtener un token JWT")
     @PostMapping("/login")
-    public ResponseEntity<?> login(co.edu.uvpalmira.urss.Backend.DTO.LoginRequest request) {
+    public ResponseEntity<?> login(co.edu.uvpalmira.urss.Backend.dto.LoginRequest request) {
         try {
-            co.edu.uvpalmira.urss.Backend.DTO.LoginResponse response = authService.autenticar(request);
+            co.edu.uvpalmira.urss.Backend.dto.LoginResponse response = authService.autenticar(request);
             return ResponseEntity.ok(response);
         } catch (RuntimeException e) {
             return ResponseEntity.status(401).body(e.getMessage());

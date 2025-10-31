@@ -1,12 +1,15 @@
 package co.edu.uvpalmira.urss.Backend.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uvpalmira.urss.Backend.Model.Admin;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import co.edu.uvpalmira.urss.Backend.BusinessLogic.AdminService;
 
 @RestController
@@ -21,18 +24,19 @@ public class AdminController {
         return adminService.crearAdministrador(admin);
     }
 
-    @PostMapping("/getAdmin")
-    public Admin getAdminById(@RequestParam Long id) {
+    @GetMapping("/getAdminById/{id}")
+    public Admin getAdminById(@PathVariable("id") Long id) {
+        System.out.println("Buscando admin con ID: " + id);
         return adminService.SearchById(id);
     }
 
-    @PostMapping("/deleteAdmin")
-    public void deleteAdmin(@RequestParam Long id) {
+    @DeleteMapping("/deleteAdmin/{id}")
+    public void deleteAdmin(@PathVariable("id") Long id) {
         adminService.eliminarAdministrador(id);
     }
 
-    @PostMapping("/updateAdmin")
-    public Admin updateAdmin(@RequestParam Long id, @RequestBody Admin adminActualizado) {
+    @PutMapping("/updateAdmin/{id}")
+    public Admin updateAdmin(@PathVariable("id") Long id, @RequestBody Admin adminActualizado) {
         return adminService.actualizarAdministrador(id, adminActualizado);
     }
 

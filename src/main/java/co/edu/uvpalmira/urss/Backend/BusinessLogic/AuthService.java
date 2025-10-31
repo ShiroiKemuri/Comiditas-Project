@@ -3,11 +3,11 @@ package co.edu.uvpalmira.urss.Backend.BusinessLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import co.edu.uvpalmira.urss.Backend.DTO.LoginRequest;
-import co.edu.uvpalmira.urss.Backend.DTO.LoginResponse;
 import co.edu.uvpalmira.urss.Backend.Model.Admin;
 import co.edu.uvpalmira.urss.Backend.Model.IRepository.AdminRepo;
 import co.edu.uvpalmira.urss.Backend.Utilities.JwtUtil;
+import co.edu.uvpalmira.urss.Backend.dto.LoginRequest;
+import co.edu.uvpalmira.urss.Backend.dto.LoginResponse;
 
 @Service
 public class AuthService {

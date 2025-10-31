@@ -1,18 +1,18 @@
 package co.edu.uvpalmira.urss.Backend.dto;
 
+import lombok.Setter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
+public class AdminDTO {
 
-public class LoginRequest {
-
+    private Long id;
+    private String nombre;
     private String usuario;
-    private String contraseña;
-
+    private String password;
 }
