@@ -1,5 +1,5 @@
-package co.edu.uvpalmira.urss.Backend.dto;
-
+//package co.edu.uvpalmira.urss.Backend.DTO;
+package co.edu.uvpalmira.urss.Backend.DTO; 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
