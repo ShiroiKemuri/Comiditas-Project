@@ -9,10 +9,6 @@ import co.edu.uvpalmira.urss.Backend.Model.Admin;
 import co.edu.uvpalmira.urss.Backend.Model.IRepository.AdminRepo;
 import co.edu.uvpalmira.urss.Backend.Utilities.JwtUtil;
 
-//import co.edu.uvpalmira.urss.Backend.dto.LoginRequest;
-//import co.edu.uvpalmira.urss.Backend.dto.LoginResponse;
-
-
 @Service
 public class AuthService {
 

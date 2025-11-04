@@ -1,7 +1,6 @@
 package co.edu.uvpalmira.urss.Backend.Model;
 
 import jakarta.persistence.Column;
-//import jakarta.inject.Singleton;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;

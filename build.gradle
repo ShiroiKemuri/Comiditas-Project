@@ -1,7 +1,7 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.5.6'
-	id 'io.spring.dependency-management' version '1.1.7'
+	id 'org.springframework.boot' version '3.2.5'
+	id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'co.edu.uvpalmira.urss'
@@ -25,41 +25,26 @@ repositories {
 }
 
 dependencies {
+	// Spring Boot Starters (versiones gestionadas por el plugin de Spring Boot)
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	// OpenAPI / Swagger
 	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 
-	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
-	implementation 'io.jsonwebtoken:jjwt-api:0.11.1'
+	// JWT
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+ 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
-	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.1'
-
-	// https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
- 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.1'
-
-	// https://mvnrepository.com/artifact/org.springframework/spring-web
-	implementation 'org.springframework:spring-web:6.2.11'
-
-	// https://mvnrepository.com/artifact/io.swagger.core.v3/swagger-annotations
-	implementation 'io.swagger.core.v3:swagger-annotations:2.2.38'
-	// Spring Security
-	implementation 'org.springframework.boot:spring-boot-starter-security:3.1.5'
-	implementation 'org.springframework.security:spring-security-config:6.1.5'
-	implementation 'org.springframework.security:spring-security-web:6.1.5'
-
-	// https://mvnrepository.com/artifact/org.postgresql/postgresql
-	implementation 'org.postgresql:postgresql:42.7.7'
-
-	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web
-	implementation 'org.springframework.boot:spring-boot-starter-web:3.5.6'
-
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-core
-	implementation 'org.springframework.security:spring-security-core:6.5.5'
-
+	// PostgreSQL Driver
+	runtimeOnly 'org.postgresql:postgresql'
 }
 
 tasks.named('test') {
