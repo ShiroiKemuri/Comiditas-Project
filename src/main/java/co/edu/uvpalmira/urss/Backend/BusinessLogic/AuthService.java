@@ -1,5 +1,6 @@
 package co.edu.uvpalmira.urss.Backend.BusinessLogic;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +17,14 @@ public class AuthService {
     private AdminRepo administradorRepo;
     @Autowired
     private JwtUtil jwtUtil;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public LoginResponse autenticar(LoginRequest request) {
         Admin admin = administradorRepo.findByUsuario(request.getUsuario())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
-        if (!admin.getPassword().equals(request.getContraseña())) {
+        if (!passwordEncoder.matches(request.getContraseña(), admin.getPassword())) {
             throw new RuntimeException("Contraseña incorrecta");
         }
 
