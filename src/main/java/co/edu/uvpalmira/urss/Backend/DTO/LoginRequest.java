@@ -1,5 +1,5 @@
-//package co.edu.uvpalmira.urss.Backend.DTO;
-package co.edu.uvpalmira.urss.Backend.DTO; 
+package co.edu.uvpalmira.urss.Backend.DTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import lombok.Setter;
 
 public class LoginRequest {
 
-    private String usuario;
-    private String contraseña;
+    private String user;
+    private String password;
 
 }

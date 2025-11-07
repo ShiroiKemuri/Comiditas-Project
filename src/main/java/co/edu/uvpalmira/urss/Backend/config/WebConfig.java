@@ -23,4 +23,6 @@ public class WebConfig {
         source.registerCorsConfiguration("/**", config);
         return source;
     }
+    // El bean de CorsConfigurationSource se ha movido a SecurityConfig para
+    // centralizar la configuración.
 }

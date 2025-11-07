@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -41,12 +42,14 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         userEmail = jwtUtil.extraerUsuario(jwt); // Extraemos el usuario del token
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            // Aquí normalmente validarías el usuario contra la BD usando UserDetailsService
-            // Por ahora, si el token es válido, confiamos en él.
-            UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userEmail, null,
-                    null);
-            authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-            SecurityContextHolder.getContext().setAuthentication(authToken);
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
+
+            if (!jwtUtil.expirado(jwt)) { // Validamos que el token no esté expirado
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
+                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                SecurityContextHolder.getContext().setAuthentication(authToken);
+            }
         }
         filterChain.doFilter(request, response);
     }
