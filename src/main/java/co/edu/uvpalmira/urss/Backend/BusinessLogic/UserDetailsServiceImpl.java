@@ -1,7 +1,8 @@
 package co.edu.uvpalmira.urss.Backend.BusinessLogic;
 
+import co.edu.uvpalmira.urss.Backend.IRepository.AdminRepo;
 import co.edu.uvpalmira.urss.Backend.Model.Admin;
-import co.edu.uvpalmira.urss.Backend.Model.IRepository.AdminRepo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
