@@ -20,9 +20,9 @@ public class Category {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
-    @Column(name = "id_category", nullable = false, unique = true)
+    @Column(name = "id_category", unique = true)
     private long id;
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
     @Column(name = "description")
     private String description;
