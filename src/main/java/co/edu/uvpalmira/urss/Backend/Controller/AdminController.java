@@ -26,7 +26,6 @@ public class AdminController {
 
     @GetMapping("/getAdminById/{id}")
     public Admin getAdminById(@PathVariable("id") Long id) {
-        System.out.println("Buscando admin con ID: " + id);
         return adminService.SearchById(id);
     }
 

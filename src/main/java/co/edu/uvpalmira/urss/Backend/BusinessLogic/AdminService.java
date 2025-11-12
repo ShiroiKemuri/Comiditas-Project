@@ -5,9 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.server.ResponseStatusException;
-
+import co.edu.uvpalmira.urss.Backend.IRepository.AdminRepo;
 import co.edu.uvpalmira.urss.Backend.Model.Admin;
-import co.edu.uvpalmira.urss.Backend.Model.IRepository.AdminRepo;
 
 @Service
 public class AdminService {
