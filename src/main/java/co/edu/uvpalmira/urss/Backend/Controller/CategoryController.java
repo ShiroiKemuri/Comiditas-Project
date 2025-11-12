@@ -1,5 +1,7 @@
 package co.edu.uvpalmira.urss.Backend.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +40,11 @@ public class CategoryController {
     @PutMapping("/updateCategory/{id}")
     public Category updateCategory(@PathVariable Long id, @RequestBody Category updatedCategory) {
         return categoryService.updateCategory(id, updatedCategory);
+    }
+
+    @GetMapping("/getAllCategories")
+    public List<Category> getAllCategories() {
+        return categoryService.getAllCategories();
     }
 
 }

@@ -1,5 +1,7 @@
 package co.edu.uvpalmira.urss.Backend.BusinessLogic;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.edu.uvpalmira.urss.Backend.IRepository.CategoryRepo;
@@ -29,5 +31,9 @@ public class CategoryService {
             category.setDescription(updatedCategory.getDescription());
             return categoryRepo.save(category);
         }).orElse(null);
+    }
+
+    public List<Category> getAllCategories() {
+        return categoryRepo.findAll();
     }
 }
