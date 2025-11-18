@@ -40,10 +40,10 @@ public class Producto {
 
     @ManyToOne
     @JoinColumn(name = "category") // Nombre de la columna FK en la tabla Producto
-    private Category category;
+    private Category category;//
 
     
     
 }
 
-
+//
