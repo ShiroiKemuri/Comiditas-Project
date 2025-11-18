@@ -40,4 +40,9 @@ public class CategoryController {
         return categoryService.updateCategory(id, updatedCategory);
     }
 
+    @GetMapping("/getAllCategories")
+    public java.util.List<Category> getAllCategories() {
+        return categoryService.getAllCategories();
+    }
+
 }
