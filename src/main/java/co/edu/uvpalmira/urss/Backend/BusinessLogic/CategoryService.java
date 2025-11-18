@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.edu.uvpalmira.urss.Backend.IRepository.CategoryRepo;
 import co.edu.uvpalmira.urss.Backend.Model.Category;
+import java.util.List;
 
 @Service
 public class CategoryService {
@@ -30,4 +31,9 @@ public class CategoryService {
             return categoryRepo.save(category);
         }).orElse(null);
     }
+
+    public List<Category> getAllCategories() {
+        return categoryRepo.findAll();
+    }
+    
 }
