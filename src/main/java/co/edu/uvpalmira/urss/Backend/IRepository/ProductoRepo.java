@@ -6,4 +6,3 @@ import co.edu.uvpalmira.urss.Backend.Model.Producto;
 public interface ProductoRepo extends JpaRepository<Producto, Long> {
 
 }
-//

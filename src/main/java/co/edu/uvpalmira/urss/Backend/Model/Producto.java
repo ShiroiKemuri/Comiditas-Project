@@ -1,4 +1,5 @@
 package co.edu.uvpalmira.urss.Backend.Model;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,8 +12,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
-
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -20,6 +19,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "Producto")
 public class Producto {
+
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
     @Column(name = "id")
@@ -34,7 +34,6 @@ public class Producto {
     @Column(name = "price")
     private double price;
 
-
     @Column(name = "image")
     private String image;
 
@@ -42,8 +41,6 @@ public class Producto {
     @JoinColumn(name = "category") // Nombre de la columna FK en la tabla Producto
     private Category category;//
 
-    
-    
 }
 
 //

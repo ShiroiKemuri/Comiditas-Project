@@ -1,7 +1,6 @@
 package co.edu.uvpalmira.urss.Backend.BusinessLogic;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.edu.uvpalmira.urss.Backend.IRepository.CategoryRepo;
