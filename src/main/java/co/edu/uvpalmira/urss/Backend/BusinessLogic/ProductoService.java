@@ -56,7 +56,7 @@ public class ProductoService {
         existingProducto.setDescription(updatedProducto.getDescription());
         existingProducto.setPrice(updatedProducto.getPrice());
         existingProducto.setStock(updatedProducto.isStock());
-        existingProducto.setImageUrl(updatedProducto.getImageUrl());
+        existingProducto.setImage(updatedProducto.getImage());
 
         // 4. Guardar la entidad actualizada
         return productoRepo.save(existingProducto);

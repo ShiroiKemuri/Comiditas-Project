@@ -27,7 +27,6 @@ public class ProductoController {
         return productoService.createProducto(producto, categoryId);
     }
 
-   
     @GetMapping("/getProductoById/{id}")
     public Producto getProductoById(@PathVariable("id") Long id) {
         return productoService.getProductoById(id);

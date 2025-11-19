@@ -36,12 +36,13 @@ public class Producto {
     @Column(name = "stock")
     private boolean stock; // Indica si el producto está en stock o no
 
-    @Column(name = "image_url") 
-    private String imageUrl;
+    
+    @Column(name = "image")
+    private String image; // URL o ruta de la imagen del producto
 
     
     @ManyToOne(fetch = FetchType.LAZY) // LAZY para cargar la categoría solo cuando se necesita
-    @JoinColumn(name = "category_id", nullable = false) // 'category_id' es el nombre de la FK en la tabla producto. 'nullable = false' si todo producto debe tener categoría.
+    @JoinColumn(name = "category", nullable = false) // 'category_id' es el nombre de la FK en la tabla producto. 'nullable = false' si todo producto debe tener categoría.
     private Category category;
     
 }
