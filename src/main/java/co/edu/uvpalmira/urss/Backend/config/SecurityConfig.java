@@ -25,26 +25,36 @@ public class SecurityConfig {
     @Autowired
     private JwtAuthFilter jwtAuthFilter;
 
-    @Bean(name = "securityFilterChain")
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                        .requestMatchers("/category/**").permitAll()
-                        .requestMatchers("/admin/**").permitAll()
-                        .anyRequest()
-                        .authenticated())
+
+                        // Reglas para Productos
+                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/product/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/product/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/product/**").authenticated()
+
+                        // Reglas para Categorías
+                        .requestMatchers(HttpMethod.GET, "/category/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/category/**").authenticated()
+                        .requestMatchers(HttpMethod.PUT, "/category/**").authenticated()
+                        .requestMatchers(HttpMethod.DELETE, "/category/**").authenticated()
+
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
-    @Bean(name = "corsConfigurationSource2")
+    @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of("http://localhost:5173"));
