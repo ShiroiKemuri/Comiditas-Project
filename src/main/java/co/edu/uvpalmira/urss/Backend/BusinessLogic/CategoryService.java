@@ -25,6 +25,10 @@ public class CategoryService {
         categoryRepo.deleteById(id);
     }
 
+    public List<Category> getAllCategories() {
+        return categoryRepo.findAll();
+    }
+
     public Category updateCategory(Long id, Category updatedCategory) {
         return categoryRepo.findById(id).map(category -> {
             category.setName(updatedCategory.getName());

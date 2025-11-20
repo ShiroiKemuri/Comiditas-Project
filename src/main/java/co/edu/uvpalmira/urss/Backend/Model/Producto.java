@@ -10,18 +10,17 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-
+import jakarta.persistence.FetchType;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "Producto")
+@Table(name = "producto") 
 public class Producto {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY) // Asegura que el ID se genere automáticamente
     @Column(name = "id")
     private Long id;
 
@@ -34,16 +33,16 @@ public class Producto {
     @Column(name = "price")
     private double price;
 
-
-    @Column(name = "image")
-    private String image;
-
-    @ManyToOne
-    @JoinColumn(name = "category") // Nombre de la columna FK en la tabla Producto
-    private Category category;//
+    @Column(name = "stock")
+    private boolean stock; // Indica si el producto está en stock o no
 
     
+    @Column(name = "image")
+    private String image; // URL o ruta de la imagen del producto
+
+    
+    @ManyToOne(fetch = FetchType.LAZY) // LAZY para cargar la categoría solo cuando se necesita
+    @JoinColumn(name = "category", nullable = false) // 'category_id' es el nombre de la FK en la tabla producto. 'nullable = false' si todo producto debe tener categoría.
+    private Category category;
     
 }
-
-//

@@ -1,6 +1,4 @@
 package co.edu.uvpalmira.urss.Backend.Controller;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,22 +8,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import co.edu.uvpalmira.urss.Backend.BusinessLogic.ProductoService;
 
+import co.edu.uvpalmira.urss.Backend.BusinessLogic.ProductoService;
 import co.edu.uvpalmira.urss.Backend.Model.Producto;
 
+
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/producto")
 public class ProductoController {
     @Autowired
     private ProductoService productoService;
 
-    @PostMapping("/createProduct")
+    @PostMapping("/createProducto")
     public Producto createProducto(@RequestBody Producto producto) {
-        return productoService.createProducto(producto);
+
+        Long categoryId = extractCategoryId(producto);
+
+        return productoService.createProducto(producto, categoryId);
     }
 
-    @GetMapping("/getProductById/{id}")
+    @GetMapping("/getProductoById/{id}")
     public Producto getProductoById(@PathVariable("id") Long id) {
         return productoService.getProductoById(id);
     }
@@ -35,14 +37,24 @@ public class ProductoController {
         productoService.deleteProducto(id);
     }
 
-    @PutMapping("/updateProduct/{id}")
+    @PutMapping("/updateProducto/{id}")
     public Producto updateProducto(@PathVariable("id") Long id, @RequestBody Producto updatedProducto) {
-        return productoService.updateProducto(id, updatedProducto);
+
+        Long categoryId = extractCategoryId(updatedProducto);
+
+        return productoService.updateProducto(id, updatedProducto, categoryId);
     }
+
     @GetMapping("/getAllProductos")
     public java.util.List<Producto> getAllProductos() {
         return productoService.getAllProductos();
     }
 
+    private Long extractCategoryId(Producto producto) {
+        if (producto.getCategory() == null) {
+            // Lanza una excepción clara si el payload JSON está incompleto
+            throw new IllegalArgumentException("El ID de la categoría es requerido y debe ser incluido en la solicitud.");
+        }
+        return producto.getCategory().getId();
+    }
 }
-//
