@@ -39,7 +39,7 @@ public class CategoryController {
      */
 
     @PutMapping("/desactivateCategory/{id}")
-    public ResponseEntity<Category> desactivateCategory(@PathVariable Long id) {
+    public ResponseEntity<Category> desactivateCategory(@PathVariable("id") Long id) {
         Category deactivatedCategory = categoryService.desactivateCategory(id);
         if (deactivatedCategory != null) {
             return ResponseEntity.ok(deactivatedCategory);
