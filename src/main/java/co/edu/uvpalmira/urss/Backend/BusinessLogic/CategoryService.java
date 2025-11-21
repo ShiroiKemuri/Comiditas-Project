@@ -35,6 +35,9 @@ public class CategoryService {
         }).orElse(null);
     }
 
+    public List<Category> getAllCategories() {
+        return categoryRepo.findAll();
+    }
     public Category updateCategory(Long id, Category updatedCategory) {
         return categoryRepo.findById(id).map(category -> {
             category.setName(updatedCategory.getName());
@@ -43,8 +46,6 @@ public class CategoryService {
         }).orElse(null);
     }
 
-    public List<Category> getAllCategories() {
-        return categoryRepo.findAll();
-    }
+    
 }
 
