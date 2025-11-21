@@ -12,7 +12,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepo categoryRepo;
 
-    public Category createCategory(co.edu.uvpalmira.urss.Backend.Model.Category category) {
+    public Category createCategory(Category category) {
         return categoryRepo.save(category);
     }
 
@@ -29,7 +29,7 @@ public class CategoryService {
 
     public Category desactivateCategory(Long id) {
         return categoryRepo.findById(id).map(category -> {
-            category.setActive(false);
+            category.setActive(false); 
             return categoryRepo.save(category);
         }).orElse(null);
     }
