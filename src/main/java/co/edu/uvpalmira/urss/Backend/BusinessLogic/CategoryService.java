@@ -20,12 +20,18 @@ public class CategoryService {
         return categoryRepo.findById(id).orElse(null);
     }
 
-    public void deleteCategory(Long id) {
-        categoryRepo.deleteById(id);
-    }
+    // deleteCategory ya no se podrá usar, se cambia por desactivateCategory
+    /*
+     * public void deleteCategory(Long id) {
+     * categoryRepo.deleteById(id);
+     * }
+     */
 
-    public List<Category> getAllCategories() {
-        return categoryRepo.findAll();
+    public Category desactivateCategory(Long id) {
+        return categoryRepo.findById(id).map(category -> {
+            category.setActive(false);
+            return categoryRepo.save(category);
+        }).orElse(null);
     }
 
     public Category updateCategory(Long id, Category updatedCategory) {
@@ -34,5 +40,9 @@ public class CategoryService {
             category.setDescription(updatedCategory.getDescription());
             return categoryRepo.save(category);
         }).orElse(null);
+    }
+
+    public List<Category> getAllCategories() {
+        return categoryRepo.findAll();
     }
 }
