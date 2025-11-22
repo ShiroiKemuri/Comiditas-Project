@@ -1,7 +1,6 @@
 package co.edu.uvpalmira.urss.Backend.BusinessLogic;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import co.edu.uvpalmira.urss.Backend.IRepository.CategoryRepo;
@@ -13,7 +12,7 @@ public class CategoryService {
     @Autowired
     private CategoryRepo categoryRepo;
 
-    public Category createCategory(co.edu.uvpalmira.urss.Backend.Model.Category category) {
+    public Category createCategory(Category category) {
         return categoryRepo.save(category);
     }
 
@@ -21,12 +20,18 @@ public class CategoryService {
         return categoryRepo.findById(id).orElse(null);
     }
 
-    public void deleteCategory(Long id) {
-        categoryRepo.deleteById(id);
-    }
+    // deleteCategory ya no se podrá usar, se cambia por desactivateCategory
+    /*
+     * public void deleteCategory(Long id) {
+     * categoryRepo.deleteById(id);
+     * }
+     */
 
-    public List<Category> getAllCategories() {
-        return categoryRepo.findAll();
+    public Category desactivateCategory(Long id) {
+        return categoryRepo.findById(id).map(category -> {
+            category.setActive(false); 
+            return categoryRepo.save(category);
+        }).orElse(null);
     }
 
     public Category updateCategory(Long id, Category updatedCategory) {
@@ -35,5 +40,9 @@ public class CategoryService {
             category.setDescription(updatedCategory.getDescription());
             return categoryRepo.save(category);
         }).orElse(null);
+    }
+
+    public List<Category> getAllCategories() {
+        return categoryRepo.findAll();
     }
 }

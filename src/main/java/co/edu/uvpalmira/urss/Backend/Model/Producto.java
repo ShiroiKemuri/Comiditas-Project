@@ -1,37 +1,52 @@
 package co.edu.uvpalmira.urss.Backend.Model;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name = "categories")
-public class Category {
+@Table(name = "Producto")
+public class Producto {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
-    @Column(name = "id_category", unique = true)
-    private long id;
+    @Column(name = "id")
+    private Long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "description")
     private String description;
 
-    @Column(name = "active")
-    private boolean active;
+    @Column(name = "price")
+    private double price;
 
-    // Constructor para nuevas categorías, por defecto activas
-    public Category(long id, String name, String description) {
-        this(id, name, description, true);
-    }
+    @Column(name = "image")
+    private String image;
+
+    @Column(name= "Fecha_Creacion")
+    private LocalDateTime fechaCreacion;
+
+
+    @ManyToOne
+    @JoinColumn(name = "category") // Nombre de la columna FK en la tabla Producto
+    private Category category;//
+
 }
+
+//
