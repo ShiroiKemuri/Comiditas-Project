@@ -30,7 +30,6 @@ public class Category {
     @Column(name = "active")
     private boolean active;
 
-    // Constructor para nuevas categorías, por defecto activas
     public Category(long id, String name, String description) {
         this(id, name, description, true);
     }

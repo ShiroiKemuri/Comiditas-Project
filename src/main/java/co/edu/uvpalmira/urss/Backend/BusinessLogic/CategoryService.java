@@ -20,16 +20,9 @@ public class CategoryService {
         return categoryRepo.findById(id).orElse(null);
     }
 
-    // deleteCategory ya no se podrá usar, se cambia por desactivateCategory
-    /*
-     * public void deleteCategory(Long id) {
-     * categoryRepo.deleteById(id);
-     * }
-     */
-
     public Category desactivateCategory(Long id) {
         return categoryRepo.findById(id).map(category -> {
-            category.setActive(false); 
+            category.setActive(false);
             return categoryRepo.save(category);
         }).orElse(null);
     }

@@ -31,7 +31,6 @@ public class AuthService {
         }
 
         if (passwordEncoder.matches(request.getPassword(), admin.getPassword())) {
-            // Si el login es exitoso, reseteamos los contadores
             admin.setFailedLoginAttempts(0);
             admin.setAccountLockedUntil(null);
             administradorRepo.save(admin);
@@ -40,7 +39,6 @@ public class AuthService {
             return new LoginResponse(token, "Autenticación exitosa");
         }
 
-        // Si la contraseña es incorrecta, manejamos la lógica de intentos fallidos
         admin.setFailedLoginAttempts(admin.getFailedLoginAttempts() + 1);
         if (admin.getFailedLoginAttempts() >= 3) {
             admin.setAccountLockedUntil(LocalDateTime.now().plusMinutes(20));

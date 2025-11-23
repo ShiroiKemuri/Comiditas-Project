@@ -1,7 +1,5 @@
 package co.edu.uvpalmira.urss.Backend.Model;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,17 +34,11 @@ public class Producto {
     @Column(name = "price")
     private double price;
 
-    @Column(name = "image")
-    private String image;
-
-    @Column(name= "Fecha_Creacion")
-    private LocalDateTime fechaCreacion;
-
+    @Column(name = "imageUrl", columnDefinition = "TEXT")
+    private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "category") // Nombre de la columna FK en la tabla Producto
-    private Category category;//
+    @JoinColumn(name = "category")
+    private Category category;
 
 }
-
-//

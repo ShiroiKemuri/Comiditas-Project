@@ -1,5 +1,5 @@
-//package co.edu.uvpalmira.urss.Backend.DTO;
-package co.edu.uvpalmira.urss.Backend.DTO; 
+package co.edu.uvpalmira.urss.Backend.DTO;
+
 public class LoginResponse {
     private String token;
     private String mensaje;
