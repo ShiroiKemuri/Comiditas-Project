@@ -36,7 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 
                         // Reglas para Productos
-                        .requestMatchers(HttpMethod.GET, "/product/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/product", "/product/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/product/**").authenticated()
                         .requestMatchers(HttpMethod.PUT, "/product/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/product/**").authenticated()

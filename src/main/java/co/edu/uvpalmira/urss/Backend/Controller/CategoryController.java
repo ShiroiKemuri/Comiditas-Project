@@ -31,13 +31,6 @@ public class CategoryController {
         return categoryService.getCategoryById(id);
     }
 
-    // deleteCategory ya no se podrá usar, se cambia por desactivateCategory
-    /*
-     * @DeleteMapping("/deleteCategory/{id}")
-     * public void deleteCategory(@PathVariable("id") Long id) {
-     * categoryService.deleteCategory(id);
-     */
-
     @PutMapping("/desactivateCategory/{id}")
     public ResponseEntity<Category> desactivateCategory(@PathVariable("id") Long id) {
         Category deactivatedCategory = categoryService.desactivateCategory(id);
