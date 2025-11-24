@@ -2,7 +2,6 @@ package co.edu.uvpalmira.urss.Backend.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-//import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,13 +29,6 @@ public class CategoryController {
     public Category getCategoryById(@PathVariable("id") Long id) {
         return categoryService.getCategoryById(id);
     }
-
-    // deleteCategory ya no se podrá usar, se cambia por desactivateCategory
-    /*
-     * @DeleteMapping("/deleteCategory/{id}")
-     * public void deleteCategory(@PathVariable("id") Long id) {
-     * categoryService.deleteCategory(id);
-     */
 
     @PutMapping("/desactivateCategory/{id}")
     public ResponseEntity<Category> desactivateCategory(@PathVariable("id") Long id) {
