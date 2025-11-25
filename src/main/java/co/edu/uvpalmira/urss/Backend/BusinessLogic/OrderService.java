@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,22 +23,19 @@ public class OrderService {
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH,mm");
 
     public List<OrderDTO> getTodaysOrders() {
-        LocalDateTime startOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MIN);
-        LocalDateTime endOfDay = LocalDateTime.of(LocalDate.now(), LocalTime.MAX);
-
-        List<Order> orders = orderRepository.findAllByCreationTimestampBetweenOrderByCreationTimestampDesc(startOfDay, endOfDay);
+        
+        List<Order> orders = orderRepository.findByDateOrderByTimeDesc(LocalDate.now());
 
         return orders.stream().map(this::convertToDto).collect(Collectors.toList());
     }
 
     private OrderDTO convertToDto(Order order) {
         OrderDTO dto = new OrderDTO();
-        dto.setOrderNumber(order.getId());
+        dto.setOrderNumber(order.getOrderNumber());
         dto.setCustomerNumber(order.getCustomerNumber());
         dto.setTotalToPay(order.getTotalToPay());
-        dto.setDate(order.getCreationTimestamp().format(DATE_FORMATTER));
-        dto.setTime(order.getCreationTimestamp().format(TIME_FORMATTER));
-
+        dto.setDate(order.getDate().format(DATE_FORMATTER));
+        dto.setTime(order.getTime().format(TIME_FORMATTER));
         List<OrderItemDTO> itemDTOs = order.getItems().stream()
                 .map(this::convertItemToDto)
                 .collect(Collectors.toList());

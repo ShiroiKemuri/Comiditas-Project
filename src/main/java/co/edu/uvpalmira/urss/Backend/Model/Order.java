@@ -12,7 +12,8 @@ import jakarta.persistence.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -30,18 +31,23 @@ public class Order {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "order_number") // número de orden
+    private Long orderNumber;
 
     @Column(name = "customer_number", nullable = false)
-    private String customerNumber;
+    private String customerNumber; // número de cliente
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> items = new ArrayList<>();
+    private List<OrderItem> items = new ArrayList<>(); // lista de ítems en la orden
 
     @Column(name = "total_to_pay")
-    private BigDecimal totalToPay;
+    private BigDecimal totalToPay; // total a pagar
 
-    @Column(name = "creation_timestamp")
-    private LocalDateTime creationTimestamp;
+    @Column(name = "date")
+    private LocalDate date; // fecha de la orden
+
+    @Column(name = "time")
+    private LocalTime time; // hora de la orden
+
+
 }
