@@ -21,7 +21,7 @@ public class OrderItem {
 
     @Id
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.AUTO)
-    private Long id;
+    private Long idOrderItem;
 
     private String dishName;
 
