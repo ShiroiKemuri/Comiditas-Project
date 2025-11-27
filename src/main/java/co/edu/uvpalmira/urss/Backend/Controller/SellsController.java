@@ -1,14 +1,16 @@
 package co.edu.uvpalmira.urss.Backend.Controller;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uvpalmira.urss.Backend.BusinessLogic.SellsService;
-import co.edu.uvpalmira.urss.Backend.Model.Sells;
+import co.edu.uvpalmira.urss.Backend.DTO.CreateSaleRequestDto;
+import co.edu.uvpalmira.urss.Backend.Model.Sale;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -19,23 +21,21 @@ public class SellsController {
     private SellsService sellsService;
 
     @PostMapping("/createSell")
-    public Sells createSell(@RequestBody Sells sell) {
-        return sellsService.createSells(sell);
+    public ResponseEntity<Sale> createSell(@RequestBody CreateSaleRequestDto saleRequest) {
+        Sale newSale = sellsService.createSale(saleRequest);
+        return ResponseEntity.ok(newSale);
     }
 
-    @GetMapping("/getSellById/{id}")
-    public Sells getSellById(@PathVariable("id") Long id) {
-        return sellsService.getSellsById(id);
+    @GetMapping("/getSaleById/{id}")
+    public ResponseEntity<Sale> getSaleById(@PathVariable Long id) {
+        Sale sale = sellsService.getSaleById(id);
+        return ResponseEntity.ok(sale);
     }
 
-    @PutMapping("/updateSell/{id}")
-    public Sells updateSell(@PathVariable("id") Long id, @RequestBody Sells updatedSell) {
-        return sellsService.updateSells(id, updatedSell);
-    }
-
-    @GetMapping("/getAllSells")
-    public java.util.List<Sells> getAllSells() {
-        return sellsService.getAllSells();
+    @GetMapping("/getAllSales")
+    public ResponseEntity<List<Sale>> getAllSales() {
+        List<Sale> sales = sellsService.getAllSales();
+        return ResponseEntity.ok(sales);
     }
 
 }
