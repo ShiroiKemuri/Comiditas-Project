@@ -1,4 +1,3 @@
-// En un nuevo archivo llamado SaleItem.java
 package co.edu.uvpalmira.urss.Backend.Model;
 
 import jakarta.persistence.*;
@@ -15,12 +14,10 @@ public class SaleItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Muchos ítems pertenecen a una venta
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "sale_id", nullable = false)
     private Sale sale;
 
-    // Muchos ítems pueden referenciar a un producto
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id", nullable = false)
     private Producto product;
@@ -29,5 +26,5 @@ public class SaleItem {
     private int quantity;
 
     @Column(nullable = false)
-    private double pricePerUnit; // Precio al momento de la venta
+    private double pricePerUnit;
 }

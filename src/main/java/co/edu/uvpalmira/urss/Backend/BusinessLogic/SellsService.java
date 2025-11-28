@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+import co.edu.uvpalmira.urss.Backend.DTO.SaleItemResponseDto;
+import co.edu.uvpalmira.urss.Backend.DTO.SaleResponseDto;
 import co.edu.uvpalmira.urss.Backend.DTO.CreateSaleRequestDto;
 import co.edu.uvpalmira.urss.Backend.DTO.SaleItemRequestDto;
 import co.edu.uvpalmira.urss.Backend.IRepository.ProductoRepo;
@@ -15,6 +17,7 @@ import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SellsService {
@@ -55,7 +58,23 @@ public class SellsService {
                         "Venta no encontrada con id: " + id));
     }
 
-    public List<Sale> getAllSales() {
-        return saleRepo.findAll();
+    public List<SaleResponseDto> getAllSales() {
+        List<Sale> sales = saleRepo.findAll();
+        return sales.stream().map(this::mapToSaleResponseDto).collect(Collectors.toList());
+    }
+
+    private SaleResponseDto mapToSaleResponseDto(Sale sale) {
+        SaleResponseDto dto = new SaleResponseDto();
+        dto.setSaleId(sale.getId());
+        dto.setSaleDate(sale.getSaleDate());
+        dto.setTotalAmount(sale.getTotalAmount());
+
+        List<SaleItemResponseDto> itemDtos = sale.getItems().stream()
+                .map(item -> new SaleItemResponseDto(
+                        item.getProduct().getName(),
+                        item.getQuantity()))
+                .collect(Collectors.toList());
+        dto.setItems(itemDtos);
+        return dto;
     }
 }

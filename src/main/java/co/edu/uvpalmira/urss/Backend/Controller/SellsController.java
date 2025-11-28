@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import co.edu.uvpalmira.urss.Backend.BusinessLogic.SellsService;
 import co.edu.uvpalmira.urss.Backend.DTO.CreateSaleRequestDto;
+import co.edu.uvpalmira.urss.Backend.DTO.SaleResponseDto;
 import co.edu.uvpalmira.urss.Backend.Model.Sale;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -33,8 +34,8 @@ public class SellsController {
     }
 
     @GetMapping("/getAllSales")
-    public ResponseEntity<List<Sale>> getAllSales() {
-        List<Sale> sales = sellsService.getAllSales();
+    public ResponseEntity<List<SaleResponseDto>> getAllSales() {
+        List<SaleResponseDto> sales = sellsService.getAllSales();
         return ResponseEntity.ok(sales);
     }
 
