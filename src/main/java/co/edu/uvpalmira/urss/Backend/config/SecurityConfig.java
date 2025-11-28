@@ -30,24 +30,21 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+                .authorizeHttpRequests(auth -> {
+                    // Endpoints públicos
+                    auth.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+                    auth.requestMatchers("/auth/**").permitAll();
+                    auth.requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/product", "/product/**").permitAll();
+                    auth.requestMatchers(HttpMethod.GET, "/category/**").permitAll();
+                    auth.requestMatchers(HttpMethod.POST, "/sells/createSell").permitAll();
 
-                        // Reglas para Productos
-                        .requestMatchers(HttpMethod.GET, "/product", "/product/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/product/**").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/product/**").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/product/**").authenticated()
-
-                        // Reglas para Categorías
-                        .requestMatchers(HttpMethod.GET, "/category/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/category/**").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/category/**").authenticated()
-                        .requestMatchers(HttpMethod.DELETE, "/category/**").authenticated()
-
-                        .anyRequest().authenticated())
+                    // Endpoints que requieren autenticación
+                    auth.requestMatchers(HttpMethod.POST, "/product/**").authenticated();
+                    auth.requestMatchers(HttpMethod.PUT, "/product/**").authenticated();
+                    auth.requestMatchers(HttpMethod.DELETE, "/product/**").authenticated();
+                    auth.anyRequest().authenticated();
+                })
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
