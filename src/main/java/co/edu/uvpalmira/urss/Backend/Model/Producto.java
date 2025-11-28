@@ -37,6 +37,9 @@ public class Producto {
     @Column(name = "imageUrl", columnDefinition = "TEXT")
     private String imageUrl;
 
+    @Column(name = "active")
+    private boolean active;
+
     @ManyToOne
     @JoinColumn(name = "category")
     private Category category;

@@ -3,6 +3,7 @@ package co.edu.uvpalmira.urss.Backend.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import co.edu.uvpalmira.urss.Backend.BusinessLogic.ProductoService;
 import co.edu.uvpalmira.urss.Backend.Model.Producto;
+import co.edu.uvpalmira.urss.Backend.Model.Category;
+
 
 @RestController
 @RequestMapping("/product")
@@ -35,11 +38,23 @@ public class ProductoController {
     public void deleteProducto(@PathVariable("id") Long id) {
         productoService.deleteProducto(id);
     }
+    
+    @PutMapping("/desactivateProduct/{id}")
+    public ResponseEntity<Producto> desactivateProducto(@PathVariable("id") Long id) {
+        Producto desactivatedProducto = productoService.desactivateProducto(id);
+        if (desactivatedProducto != null) {
+            return ResponseEntity.ok(desactivatedProducto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
 
     @PutMapping("/updateProduct/{id}")
     public Producto updateProducto(@PathVariable("id") Long id, @RequestBody Producto updatedProducto) {
         return productoService.updateProducto(id, updatedProducto);
     }
+    
 
     @GetMapping("/getAllProductos")
     public List<Producto> getAllProductos() {

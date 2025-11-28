@@ -33,6 +33,14 @@ public class ProductoService {
         productoRepo.deleteById(id);
     }
 
+    public Producto desactivateProducto(Long id) {
+        
+        return productoRepo.findById(id).map(producto ->  {
+            producto.setActive(false);
+            return productoRepo.save(producto);
+        }).orElse(null);
+        }
+
     public Producto updateProducto(Long id, Producto updatedProducto) {
         return productoRepo.findById(id).map(producto -> {
             producto.setName(updatedProducto.getName());
