@@ -1,4 +1,3 @@
-// En un nuevo archivo llamado Sale.java
 package co.edu.uvpalmira.urss.Backend.Model;
 
 import jakarta.persistence.*;
@@ -23,7 +22,6 @@ public class Sale {
     @Column(nullable = false)
     private double totalAmount;
 
-    // Una venta tiene muchos ítems de venta
     @OneToMany(mappedBy = "sale", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SaleItem> items;
 }
